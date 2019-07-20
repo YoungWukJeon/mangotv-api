@@ -1,0 +1,13 @@
+package com.study.mangotv;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class MangoTvApiApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}

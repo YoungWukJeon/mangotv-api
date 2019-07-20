@@ -1,0 +1,8 @@
+spring:
+    http:
+        encoding:
+            charset: utf-8
+
+server:
+    tomcat:
+        uri-encoding: utf-8
