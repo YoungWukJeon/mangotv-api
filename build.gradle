@@ -4,6 +4,7 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'base'
 
 group = 'com.study'
 version = '0.0.1-SNAPSHOT'
