@@ -2,6 +2,14 @@ spring:
     http:
         encoding:
             charset: utf-8
+    datasource:
+        url: jdbc:mysql://mangotv.cfhwcxf5qu53.ap-northeast-2.rds.amazonaws.com:3306/mangotv_dev?serverTimezone=UTC&useSSL=false
+        username: mangotvadmin
+        password: mangotvpass
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    jpa:
+        show-sql: true
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 
 server:
     tomcat:

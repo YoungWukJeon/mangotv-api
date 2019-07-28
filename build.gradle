@@ -26,6 +26,18 @@ repositories {
 dependencies {
 	compile 'org.springframework.boot:spring-boot-starter'
 	compile 'org.springframework.boot:spring-boot-starter-web'
+
+	// db
+	compile 'org.springframework.boot:spring-boot-starter-jdbc'
+	compile 'mysql:mysql-connector-java:8.0.13'
+
+	// jpa
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// lombok
+	compile 'org.projectlombok:lombok'
+
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
