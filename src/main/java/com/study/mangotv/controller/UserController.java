@@ -1,8 +1,6 @@
 package com.study.mangotv.controller;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 import com.study.mangotv.domain.UserEntity;
 import com.study.mangotv.domain.model.UserCreationDto;
@@ -10,7 +8,6 @@ import com.study.mangotv.domain.model.UserInfoDto;
 import com.study.mangotv.domain.UserJpaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters.LocalDateTimeConverter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
