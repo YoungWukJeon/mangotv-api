@@ -1,5 +1,7 @@
 package com.study.mangotv.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,9 +17,25 @@ import lombok.Data;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    Long id;
+    @Column(name = "srl", nullable = false)
+    long srl;
 
-    @Column(name = "name", nullable = false)
-    String name;
+    @Column(name = "id", nullable = false)
+    String id;
+
+    String password;
+
+    String nickname;
+
+    String email;
+
+    String status;
+
+    String iconUrl;
+
+    LocalDateTime createDate;
+
+    LocalDateTime updateDate;
+
+    LocalDateTime loginDate;
 }

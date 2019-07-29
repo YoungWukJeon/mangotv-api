@@ -1,6 +1,7 @@
 package com.study.mangotv.controller;
 
 import com.study.mangotv.domain.UserEntity;
+import com.study.mangotv.domain.UserInfo;
 import com.study.mangotv.domain.UserJpaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,15 @@ public class UserController {
     @Autowired
     private UserJpaRepository userJpaRepository;
 
-    @GetMapping("/{id}")
-    public String userName(@PathVariable Long id) {
-        UserEntity entity = userJpaRepository.findById(id).get();
-        return entity.getName();
+    @GetMapping("/{srl}")
+    public UserInfo userInfo(@PathVariable Long srl) {
+        UserEntity userEntity = userJpaRepository.findBySrl(srl);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setSrl(userEntity.getSrl());
+        userInfo.setId(userEntity.getId());
+        userInfo.setNickname(userEntity.getNickname());
+        userInfo.setEmail(userEntity.getEmail());
+        userInfo.setIconUrl(userEntity.getIconUrl());
+        return userInfo;
     }
 }

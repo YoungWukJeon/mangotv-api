@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserJpaRepository extends CrudRepository<UserEntity, Long> {
+    public UserEntity findBySrl(long srl);
 }
