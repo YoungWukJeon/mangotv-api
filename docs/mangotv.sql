@@ -61,11 +61,11 @@ CREATE TABLE `user` (
   `icon_url` varchar(255) DEFAULT NULL,
   `create_date` datetime NOT NULL,
   `update_date` datetime NOT NULL,
-  `login_date` datetime NOT NULL,
+  `login_date` datetime DEFAULT NULL,
   PRIMARY KEY (`srl`),
   UNIQUE KEY `id` (`id`),
   KEY `idx_status_01` (`status`,`login_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (18,'testUser','testPass','nickname',NULL,'NORMAL',NULL,'2019-03-01 07:19:31','2019-03-01 07:19:31','2019-03-01 07:19:31'),(19,'testStreamer','testPass','streamer1',NULL,'NORMAL',NULL,'2019-03-01 07:20:23','2019-03-01 07:20:23','2019-03-01 07:20:23');
+INSERT INTO `user` VALUES (18,'testUser','testPass','nickname',NULL,'NORMAL',NULL,'2019-03-01 07:19:31','2019-03-01 07:19:31','2019-03-01 07:19:31'),(19,'testStreamer','testPass','streamer1',NULL,'NORMAL',NULL,'2019-03-01 07:20:23','2019-03-01 07:20:23','2019-03-01 07:20:23'),(20,'testAdmin','testPass','Admin1','abc@naver.com','NORMAL',NULL,'2019-07-29 17:46:22','2019-07-29 17:46:22',NULL),(22,'testAdmin2','testPass','Admin2','abc@naver.com','NORMAL',NULL,'2019-07-29 17:49:11','2019-07-29 17:49:11',NULL),(23,'testAdmin3','testPass','Admin3','abc@naver.com','NORMAL',NULL,'2019-07-29 19:28:13','2019-07-29 19:28:13',NULL),(24,'testAdmin4','testPass','Admin4','abc@naver.com','NORMAL',NULL,'2019-07-29 19:35:09','2019-07-29 19:35:09',NULL),(25,'testAdmin5','testPass','Admin5','abc@naver.com','NORMAL',NULL,'2019-07-30 04:39:40','2019-07-30 04:39:40',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -87,4 +87,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-29  1:12:15
+-- Dump completed on 2019-07-30  4:41:02
