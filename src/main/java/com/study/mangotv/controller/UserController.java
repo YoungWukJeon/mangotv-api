@@ -1,19 +1,14 @@
 package com.study.mangotv.controller;
 
-import java.time.LocalDateTime;
-
 import com.study.mangotv.domain.UserEntity;
-import com.study.mangotv.domain.model.UserCreationDto;
-import com.study.mangotv.domain.model.UserInfoDto;
 import com.study.mangotv.domain.UserJpaRepository;
-
+import com.study.mangotv.domain.model.RequestUserSaveDto;
+import com.study.mangotv.domain.model.ResponseUserOneDto;
+import com.study.mangotv.domain.model.UserInfoDto;
+import com.study.mangotv.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -24,37 +19,28 @@ public class UserController {
     private UserJpaRepository userJpaRepository;
 
     @GetMapping("/{srl}")
-    public UserInfoDto selectUser(@PathVariable Long srl) {
+    public ResponseEntity<UserInfoDto> selectUser(@PathVariable Long srl) throws UserNotFoundException{
+
         UserEntity userEntity = userJpaRepository.findBySrl(srl);
-        UserInfoDto userInfoDto = new UserInfoDto();
-        userInfoDto.setSrl(userEntity.getSrl());
-        userInfoDto.setId(userEntity.getId());
-        userInfoDto.setNickname(userEntity.getNickname());
-        userInfoDto.setEmail(userEntity.getEmail());
-        userInfoDto.setIconUrl(userEntity.getIconUrl());
-        return userInfoDto;
+
+        if(userEntity == null){
+            throw new UserNotFoundException("User Not Found On SRL : " + srl);
+        }
+
+        UserInfoDto userInfoDto = new UserInfoDto(userEntity);
+
+        return ResponseEntity.ok().body(userInfoDto);
     }
 
     @PostMapping("/")
-    public UserInfoDto createUser(@RequestBody UserCreationDto userCreationDto) {
-        UserEntity userCreationEntity = new UserEntity();
-        userCreationEntity.setId(userCreationDto.getId());
-        userCreationEntity.setPassword(userCreationDto.getPassword());
-        userCreationEntity.setNickname(userCreationDto.getNickname());
-        userCreationEntity.setEmail(userCreationDto.getEmail());
-        userCreationEntity.setCreateDate(LocalDateTime.now());
-        userCreationEntity.setUpdateDate(LocalDateTime.now());
+    public ResponseEntity<ResponseUserOneDto> createUser(@RequestBody RequestUserSaveDto requestUserSaveDto) {
 
-        UserEntity userEntity = userJpaRepository.save(userCreationEntity);
+        UserEntity userEntity = requestUserSaveDto.toEntity();
+        UserEntity savedUserEntity = userJpaRepository.save(userEntity);
 
-        UserInfoDto userInfoDto = new UserInfoDto();
-        userInfoDto.setSrl(userEntity.getSrl());
-        userInfoDto.setId(userEntity.getId());
-        userInfoDto.setNickname(userEntity.getNickname());
-        userInfoDto.setEmail(userEntity.getEmail());
-        userInfoDto.setIconUrl(userEntity.getIconUrl());
+        ResponseUserOneDto responseUserOneDto = new ResponseUserOneDto(savedUserEntity);
 
-        return userInfoDto;
+        return ResponseEntity.ok().body(responseUserOneDto);
     }
     
 }
