@@ -4,12 +4,14 @@ import com.study.mangotv.domain.UserEntity;
 import lombok.Getter;
 
 @Getter
-public class RequestUserSaveDto {
+public class RequestUserDto {
 
     private String id;
     private String password;
     private String nickname;
     private String email;
+    private String status;
+    private String iconUrl;
 
     public UserEntity toEntity(){
         return UserEntity.builder()
@@ -17,6 +19,8 @@ public class RequestUserSaveDto {
                 .password(password)
                 .nickname(nickname)
                 .email(email)
+                .status(status)
+                .iconUrl(iconUrl)
                 .build();
     }
 }

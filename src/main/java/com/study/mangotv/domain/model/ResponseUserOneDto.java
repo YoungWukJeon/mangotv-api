@@ -5,11 +5,6 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-/**
- * Created by pasudo123 on 2019-07-30
- * Blog: https://pasudo123.tistory.com/
- * Email: oraedoa@gmail.com
- **/
 @Getter
 public class ResponseUserOneDto {
 
@@ -17,6 +12,8 @@ public class ResponseUserOneDto {
     private String password;
     private String nickname;
     private String email;
+    private String status;
+    private String iconUrl;
     private LocalDateTime createdDate;
     private LocalDateTime lastModifiedDate;
 
@@ -25,6 +22,8 @@ public class ResponseUserOneDto {
         this.password = userEntity.getPassword();
         this.nickname = userEntity.getNickname();
         this.email = userEntity.getEmail();
+        this.status = userEntity.getStatus();
+        this.iconUrl = userEntity.getIconUrl();
         this.createdDate = userEntity.getCreatedDate();
         this.lastModifiedDate = userEntity.getLastModifiedDate();
     }

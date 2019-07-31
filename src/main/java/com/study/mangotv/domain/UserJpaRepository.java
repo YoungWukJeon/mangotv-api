@@ -5,5 +5,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserJpaRepository extends CrudRepository<UserEntity, Long> {
+
     UserEntity findBySrl(long srl);
+
+    void deleteBySrl(long srl);
 }
