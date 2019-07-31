@@ -10,11 +10,6 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
-/**
- * Created by pasudo123 on 2019-07-30
- * Blog: https://pasudo123.tistory.com/
- * Email: oraedoa@gmail.com
- **/
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
