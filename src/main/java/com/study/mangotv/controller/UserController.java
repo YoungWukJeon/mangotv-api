@@ -5,14 +5,18 @@ import java.time.LocalDateTime;
 import com.study.mangotv.domain.UserEntity;
 import com.study.mangotv.domain.model.UserCreationDto;
 import com.study.mangotv.domain.model.UserInfoDto;
+import com.study.mangotv.domain.model.UserUpdateDto;
 import com.study.mangotv.domain.UserJpaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -56,5 +60,29 @@ public class UserController {
 
         return userInfoDto;
     }
-    
+
+    @PutMapping("/{srl}")
+    @Transactional
+    public UserInfoDto updateUser(@PathVariable Long srl, @RequestBody UserUpdateDto userUpdateDto) {
+        UserEntity userEntity = userJpaRepository.findBySrl(srl);
+        userEntity.setPassword(userUpdateDto.getPassword());
+        userEntity.setNickname(userUpdateDto.getNickname());
+        userEntity.setEmail(userUpdateDto.getEmail());
+        userEntity.setIconUrl(userUpdateDto.getIconUrl());
+        userEntity.setUpdateDate(LocalDateTime.now());
+
+        UserInfoDto userInfoDto = new UserInfoDto();
+        userInfoDto.setSrl(userEntity.getSrl());
+        userInfoDto.setId(userEntity.getId());
+        userInfoDto.setNickname(userEntity.getNickname());
+        userInfoDto.setEmail(userEntity.getEmail());
+        userInfoDto.setIconUrl(userEntity.getIconUrl());
+
+        return userInfoDto;
+    }
+
+    @DeleteMapping("/{srl}")
+    public void deleteUser(@PathVariable Long srl) {
+        userJpaRepository.deleteById(srl);
+    }
 }
