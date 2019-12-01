@@ -3,7 +3,7 @@ spring:
     encoding:
       charset: utf-8
   datasource:
-    url: jdbc:mysql://localhost:3306/mangotv?serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://localhost:3306/mangotv?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
     username: mangotvadmin
     password: mangotvpass
     driver-class-name: com.mysql.cj.jdbc.Driver
