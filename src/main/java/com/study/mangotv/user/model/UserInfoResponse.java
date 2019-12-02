@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
@@ -18,6 +19,8 @@ public class UserInfoResponse {
     private String password;
     private String nickname;
     private String email;
+    private LocalDate birthDate;
+    private Character gender;
     private String status;
     private String iconUrl;
     private LocalDateTime createDate;
@@ -31,6 +34,8 @@ public class UserInfoResponse {
                 .password(userEntity.getPassword())
                 .nickname(userEntity.getNickname())
                 .email(userEntity.getEmail())
+                .birthDate(userEntity.getBirthDate())
+                .gender(userEntity.getGender())
                 .status(userEntity.getUserStatus().name())
                 .iconUrl(userEntity.getIconUrl())
                 .createDate(userEntity.getCreateDate())
