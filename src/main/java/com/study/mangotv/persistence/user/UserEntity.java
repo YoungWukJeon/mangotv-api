@@ -1,4 +1,4 @@
-package com.study.mangotv.user.persistence;
+package com.study.mangotv.persistence.user;
 
 import com.study.mangotv.common.BaseDateTimeEntity;
 import lombok.Data;
@@ -23,15 +23,15 @@ public class UserEntity extends BaseDateTimeEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "nickname", length = 20, nullable = false, unique = true)
+    @Column(name = "nickname", length = 20, nullable = false)
     private String nickname;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email")
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "status", referencedColumnName = "status", nullable = false)
-    private UserStatus userStatus;
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserStatus userStatus = UserStatus.NORMAL;
 
     @Column(name = "icon_url")
     private String iconUrl;

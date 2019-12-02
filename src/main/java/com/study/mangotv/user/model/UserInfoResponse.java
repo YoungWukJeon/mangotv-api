@@ -1,6 +1,6 @@
 package com.study.mangotv.user.model;
 
-import com.study.mangotv.user.persistence.UserEntity;
+import com.study.mangotv.persistence.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,7 +31,7 @@ public class UserInfoResponse {
                 .password(userEntity.getPassword())
                 .nickname(userEntity.getNickname())
                 .email(userEntity.getEmail())
-                .status(userEntity.getUserStatus().getStatus())
+                .status(userEntity.getUserStatus().name())
                 .iconUrl(userEntity.getIconUrl())
                 .createDate(userEntity.getCreateDate())
                 .updateDate(userEntity.getUpdateDate())

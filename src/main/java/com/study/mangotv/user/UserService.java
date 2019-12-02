@@ -1,8 +1,8 @@
 package com.study.mangotv.user;
 
-import com.study.mangotv.user.exception.UserNotFoundException;
+import com.study.mangotv.common.exception.UserNotFoundException;
 import com.study.mangotv.user.model.UserInfoResponse;
-import com.study.mangotv.user.persistence.UserRepository;
+import com.study.mangotv.persistence.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

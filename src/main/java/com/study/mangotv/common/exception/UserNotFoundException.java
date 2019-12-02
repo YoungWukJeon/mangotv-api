@@ -1,4 +1,4 @@
-package com.study.mangotv.user.exception;
+package com.study.mangotv.common.exception;
 
 public class UserNotFoundException extends RuntimeException {
 }

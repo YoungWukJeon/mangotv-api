@@ -1,4 +1,4 @@
-package com.study.mangotv.user.persistence;
+package com.study.mangotv.persistence.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
