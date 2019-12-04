@@ -1,7 +1,9 @@
 package com.study.mangotv.user.model;
 
+import com.study.mangotv.common.util.PasswordEncoderImpl;
 import com.study.mangotv.persistence.user.UserEntity;
 import lombok.Data;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
@@ -15,9 +17,11 @@ public class UserRegistrationRequest {
     private Character gender;
 
     public UserEntity toUserEntity() {
+        PasswordEncoder passwordEncoder = new PasswordEncoderImpl();
+
         return UserEntity.builder()
                 .id(this.id)
-                .password(this.password)
+                .password(passwordEncoder.encode(this.password))
                 .nickname(this.nickname)
                 .email(this.email)
                 .birthDate(this.birthDate)
