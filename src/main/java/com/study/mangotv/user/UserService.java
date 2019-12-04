@@ -4,12 +4,15 @@ import com.study.mangotv.user.model.UserInfoResponse;
 import com.study.mangotv.persistence.user.UserRepository;
 import com.study.mangotv.user.model.UserRegistrationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    private PasswordEncoder passwordEncoder;
 
     // TODO: 2019-12-03 UserNotFoundException 적용하기 
     public UserInfoResponse getUserInfo(Long srl) {

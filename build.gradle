@@ -15,6 +15,9 @@ configurations {
 	runtimeClasspath {
 		extendsFrom developmentOnly
 	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
 }
 
 repositories {
@@ -27,11 +30,13 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter'
 	compile 'org.springframework.boot:spring-boot-starter-web'
 
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
 	// lombok
-	compile 'org.projectlombok:lombok'
-	annotationProcessor("org.projectlombok:lombok")
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
   
-  // db
+  	// db
 	compile 'org.springframework.boot:spring-boot-starter-jdbc'
 	compile 'mysql:mysql-connector-java:8.0.13'
 
