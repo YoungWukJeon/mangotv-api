@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false">
+
+    <cache name="email_authentication_value"
+           maxEntriesLocalHeap="1"
+           memoryStoreEvictionPolicy="FIFO"
+           timeToLiveSeconds="60"
+           overflowToDisk="false"
+           eternal="false"
+           diskPersistent="false"
+           transactionalMode="off">
+    </cache>
+</ehcache>
+
+<!-- references
+https://jaehun2841.github.io/2018/11/07/2018-11-04-ehcache-config-for-springboot/#ehcachexml-%EC%9E%91%EC%84%B1-ehcache-%EC%84%A4%EC%A0%95%ED%8C%8C%EC%9D%BC
+name: 캐시 이름(필수)
+maxEntriesLocalHeap: 메모리에 생성될 최대 캐시 개수(default: 0, 제한없음)
+memoryStoreEvictionPolicy: 캐시 개수가 maxEntriesLocalHeap에 도달하면 데이터 추가 정책(default: LRU)
+timeToLiveSeconds: 해당 초가 지나면 캐시가 삭제(default: 0, 제한없음)
+overflowDisk: 오버플로우된 항목에 대해 디스크에 저장할지 여부(default: false)
+eternal: 영속성 캐시 설정. true면 timeToldleSecond, timeToLiveSeconds 설정이 무시됨(default: false)
+diskPersistent: 캐시를 disk에 저장하여, 서버 로드 시 캐시를 말아 둘지 설정(default: false)
+-->

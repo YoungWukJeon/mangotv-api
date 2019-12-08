@@ -2,16 +2,29 @@ spring:
   http:
     encoding:
       charset: utf-8
+
   datasource:
     url: jdbc:mysql://localhost:3306/mangotv?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8
     username: mangotvadmin
     password: mangotvpass
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+
+  resources:
+    cache:
+      cachecontrol:
+        max-age: 5
+        no-store: false
 
 server:
   tomcat:
