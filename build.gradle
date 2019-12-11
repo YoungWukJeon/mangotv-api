@@ -56,6 +56,11 @@ dependencies {
 	// thymeleaf
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
+	// jjwt
+	compile 'io.jsonwebtoken:jjwt-api:0.10.7'
+	compile 'io.jsonwebtoken:jjwt-impl:0.10.7'
+	compile 'io.jsonwebtoken:jjwt-jackson:0.10.7'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

@@ -54,6 +54,9 @@ spring:
 #        max-age: 5
 #        no-store: false
 
+jwt:
+  secret-key: SecretKeyForJWTInEmailAuthenticationCode
+
 server:
   tomcat:
     uri-encoding: utf-8

@@ -21,6 +21,8 @@ public class EmailAuthenticationCodeService {
     private UserRepository userRepository;
     @Autowired
     private EmailAuthenticationCodeMailClient emailAuthenticationCodeMailClient;
+    @Autowired
+    private EmailAuthenticationCodeJwtProvider emailAuthenticationCodeJwtProvider;
 
     private DateTimeUtil dateTimeUtil = new DateTimeUtil();
 
@@ -55,13 +57,16 @@ public class EmailAuthenticationCodeService {
     public CodeMessageResponse matchCode(String email, String code) {
         LocalDateTime now = LocalDateTime.now();
 
-        // TODO: 2019-12-10 성공적으로 매치가 되면 jwt 등 토큰값 클라에 내려주기 
         CodeMessageResponse codeMessageResponse = emailAuthenticationCodeRepository.findById(email)
                 .filter(entity ->
                         entity.getCode().equals(code)
                                 && dateTimeUtil.timeGapToSeconds(entity.getCreateDate(), now) <= EXPIRE_TIME
                 )
-                .map(entity -> CodeMessageResponse.builder().code(1000).message("success").build())
+                .map(entity -> CodeMessageResponse.builder()
+                        .code(1000)
+                        .message(this.createJwt(entity.getEmail(), entity.getCreateDate()))
+                        .build()
+                )
                 .orElse(CodeMessageResponse.builder().code(1001).message("failure").build());
 
         if (codeMessageResponse.getCode() == 1000) {
@@ -69,5 +74,9 @@ public class EmailAuthenticationCodeService {
         }
 
         return codeMessageResponse;
+    }
+
+    private String createJwt(String email, LocalDateTime createDate) {
+        return emailAuthenticationCodeJwtProvider.createToken(email, createDate);
     }
 }
