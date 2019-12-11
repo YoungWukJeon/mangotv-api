@@ -1,7 +1,6 @@
 package com.study.mangotv.common.controller;
 
-import com.study.mangotv.common.EmailAuthenticationValueService;
-import com.study.mangotv.common.model.EmailAuthenticationCacheDto;
+import com.study.mangotv.emailauthenticationcode.EmailAuthenticationCodeService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,28 +9,28 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/v1/config")
 public class CacheController {
     @Autowired
-    private EmailAuthenticationValueService emailAuthenticationValueService;
+    private EmailAuthenticationCodeService emailAuthenticationCodeService;
 
     public String cacheEvict() {
 
         return "CACHE_EVICTED";
     }
 
-    @PostMapping("/cache/email_authentication")
-    public EmailAuthenticationCacheDto putCache(@RequestBody Request request) {
-        EmailAuthenticationCacheDto tt1 = emailAuthenticationValueService.put(request.key);
-        System.out.println("tt1: " + tt1);
-        return tt1;
-//        return emailAuthenticationValueService.put(request.key);
-    }
-
-    @GetMapping("/cache/email_authentication/{key:.+}")
-    public EmailAuthenticationCacheDto getCache(@PathVariable String key) {
-        EmailAuthenticationCacheDto tt = emailAuthenticationValueService.get(key);
-        System.out.println("tt: " + tt);
-        return tt;
-//        return emailAuthenticationValueService.get(key);
-    }
+//    @PostMapping("/cache/email_authentication")
+//    public EmailAuthenticationCacheDto putCache(@RequestBody Request request) {
+//        EmailAuthenticationCacheDto tt1 = emailAuthenticationValueService.put(request.key);
+//        System.out.println("tt1: " + tt1);
+//        return tt1;
+////        return emailAuthenticationValueService.put(request.key);
+//    }
+//
+//    @GetMapping("/cache/email_authentication/{key:.+}")
+//    public EmailAuthenticationCacheDto getCache(@PathVariable String key) {
+//        EmailAuthenticationCacheDto tt = emailAuthenticationValueService.get(key);
+//        System.out.println("tt: " + tt);
+//        return tt;
+////        return emailAuthenticationValueService.get(key);
+//    }
 
 
 }
