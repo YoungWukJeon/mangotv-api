@@ -1,4 +1,4 @@
-package com.study.mangotv.common.util;
+package com.study.mangotv.emailauthenticationcode;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;

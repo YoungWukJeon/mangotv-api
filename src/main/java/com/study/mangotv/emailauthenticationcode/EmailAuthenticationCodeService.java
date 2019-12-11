@@ -2,7 +2,6 @@ package com.study.mangotv.emailauthenticationcode;
 
 import com.study.mangotv.common.model.CodeMessageResponse;
 import com.study.mangotv.common.util.DateTimeUtil;
-import com.study.mangotv.common.util.EmailAuthenticationCodeMailClient;
 import com.study.mangotv.emailauthenticationcode.model.EmailAuthenticationCodeRequest;
 import com.study.mangotv.persistence.emailauthenticationcode.EmailAuthenticationCodeEntity;
 import com.study.mangotv.persistence.emailauthenticationcode.EmailAuthenticationCodeRepository;
