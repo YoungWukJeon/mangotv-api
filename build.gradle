@@ -47,6 +47,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-cache'
 	implementation 'net.sf.ehcache:ehcache-core:2.6.11'
 
+	// random string generator
+	implementation 'org.apache.commons:commons-lang3:3.4'
+
+	// mail
+	compile 'org.springframework.boot:spring-boot-starter-mail'
+
+	// thymeleaf
+	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

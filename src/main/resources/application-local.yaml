@@ -16,15 +16,43 @@ spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 
-  cache:
-    ehcache:
-      config: classpath:ehcache.xml
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: test.kani123@gmail.com
+    password: testaccount123!!
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            trust: smtp.gmail.com
+        mime:
+          charset: utf-8
+        transport:
+          protocol: smtp
 
-  resources:
-    cache:
-      cachecontrol:
-        max-age: 5
-        no-store: false
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+    cache: false
+#    cache: false  prod에서는 true로 해야함
+    order: 0
+
+#  cache:
+#    ehcache:
+#      config: classpath:ehcache.xml
+#
+#  resources:
+#    cache:
+#      cachecontrol:
+#        max-age: 5
+#        no-store: false
 
 server:
   tomcat:

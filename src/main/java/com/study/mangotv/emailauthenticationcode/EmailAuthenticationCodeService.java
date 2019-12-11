@@ -2,6 +2,7 @@ package com.study.mangotv.emailauthenticationcode;
 
 import com.study.mangotv.common.model.CodeMessageResponse;
 import com.study.mangotv.common.util.DateTimeUtil;
+import com.study.mangotv.common.util.EmailAuthenticationCodeMailClient;
 import com.study.mangotv.emailauthenticationcode.model.EmailAuthenticationCodeRequest;
 import com.study.mangotv.persistence.emailauthenticationcode.EmailAuthenticationCodeEntity;
 import com.study.mangotv.persistence.emailauthenticationcode.EmailAuthenticationCodeRepository;
@@ -19,6 +20,8 @@ public class EmailAuthenticationCodeService {
     private EmailAuthenticationCodeRepository emailAuthenticationCodeRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private EmailAuthenticationCodeMailClient emailAuthenticationCodeMailClient;
 
     private DateTimeUtil dateTimeUtil = new DateTimeUtil();
 
@@ -28,11 +31,10 @@ public class EmailAuthenticationCodeService {
     public CodeMessageResponse generateCode(EmailAuthenticationCodeRequest emailAuthenticationCodeRequest) {
         // TODO: 2019-12-06 요청온 이메일이 이미 DB에 존재하는지 1차 확인.
         //  2차로 캐시든 어디든 아직 인증메일 요청정보가 남아있으면 새로온 요청으로 갱신s
-//        if (this.isExistingEmail(emailAuthenticationCodeRequest.getEmail())) {
-//            throw new RuntimeException("이미 존재하는 이메일입니다.");
-//        }
         userRepository.findByEmail(emailAuthenticationCodeRequest.getEmail())
-                .ifPresent(v -> new RuntimeException("이미 존재하는 이메일입니다."));
+                .ifPresent(v -> {
+                    throw new RuntimeException("이미 존재하는 이메일입니다.");
+                });
 
         String email = emailAuthenticationCodeRequest.getEmail();
         LocalDateTime now = LocalDateTime.now();
@@ -43,7 +45,8 @@ public class EmailAuthenticationCodeService {
 
         if (codeMessageResponse.getCode() == 1000) {
             String code = RandomStringUtils.randomAlphanumeric(GENERATED_CODE_LENGTH);
-            // TODO: 2019-12-10 이메일로 code 발송 로직 필요 
+            // TODO: 2019-12-11 이메일 전송 코드 주석 풀기
+//            emailAuthenticationCodeMailSender.sendMail(email, code);
             emailAuthenticationCodeRepository.save(new EmailAuthenticationCodeEntity(email, code, now));
         }
 
@@ -67,9 +70,5 @@ public class EmailAuthenticationCodeService {
         }
 
         return codeMessageResponse;
-    }
-
-    private boolean isExistingEmail(String email) {
-        return userRepository.findByEmail(email).isPresent();
     }
 }
