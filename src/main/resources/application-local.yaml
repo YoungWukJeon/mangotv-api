@@ -55,7 +55,7 @@ spring:
 #        no-store: false
 
 jwt:
-  secret-key: SecretKeyForJWTInEmailAuthenticationCode
+  secret-key: SecretKeyForJWTInUserRegistration
 
 server:
   tomcat:

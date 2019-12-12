@@ -18,7 +18,7 @@ import java.util.Date;
 
 @RequiredArgsConstructor
 @Component
-public class EmailAuthenticationCodeJwtProvider {
+public class UserRegistrationJwtProvider {
     @Value("${jwt.secret-key}")
     private String secretKey;
     public static final long MAX_TOKEN_VALID_SECONDS = 60 * 60L;    // 토큰 최대 만료 시간 1 hour

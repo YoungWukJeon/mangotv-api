@@ -22,7 +22,7 @@ public class EmailAuthenticationCodeService {
     @Autowired
     private EmailAuthenticationCodeMailClient emailAuthenticationCodeMailClient;
     @Autowired
-    private EmailAuthenticationCodeJwtProvider emailAuthenticationCodeJwtProvider;
+    private UserRegistrationJwtProvider userRegistrationJwtProvider;
 
     private DateTimeUtil dateTimeUtil = new DateTimeUtil();
 
@@ -81,6 +81,6 @@ public class EmailAuthenticationCodeService {
     }
 
     private String createJwt(String email, LocalDateTime createDate) {
-        return emailAuthenticationCodeJwtProvider.createToken(email, createDate);
+        return userRegistrationJwtProvider.createToken(email, createDate);
     }
 }
