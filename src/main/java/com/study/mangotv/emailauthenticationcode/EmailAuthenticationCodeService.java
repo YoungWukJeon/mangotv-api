@@ -30,22 +30,22 @@ public class EmailAuthenticationCodeService {
     public static final int GENERATED_CODE_LENGTH = 15;
 
     public CodeMessageResponse generateCode(EmailAuthenticationCodeRequest emailAuthenticationCodeRequest) {
-        // TODO: 2019-12-06 요청온 이메일이 이미 DB에 존재하는지 1차 확인.
-        //  2차로 캐시든 어디든 아직 인증메일 요청정보가 남아있으면 새로온 요청으로 갱신s
         userRepository.findByEmail(emailAuthenticationCodeRequest.getEmail())
                 .ifPresent(v -> {
-                    throw new RuntimeException("이미 존재하는 이메일입니다.");
+                    throw new RuntimeException("이미 사용중인 이메일입니다.");
                 });
 
         String email = emailAuthenticationCodeRequest.getEmail();
         LocalDateTime now = LocalDateTime.now();
 
         CodeMessageResponse codeMessageResponse = emailAuthenticationCodeRepository.findById(email)
+                .filter(entity -> !this.isExpirationTimeout(now, entity.getCreateDate().plusSeconds(EXPIRE_TIME)))
                 .map(entity -> CodeMessageResponse.builder().code(1001).message("failure").build())
                 .orElse(CodeMessageResponse.builder().code(1000).message("success").build());
 
         if (codeMessageResponse.getCode() == 1000) {
             String code = RandomStringUtils.randomAlphanumeric(GENERATED_CODE_LENGTH);
+            System.out.println("Generated Code: " + code);
             // TODO: 2019-12-11 이메일 전송 코드 주석 풀기
 //            emailAuthenticationCodeMailSender.sendMail(email, code);
             emailAuthenticationCodeRepository.save(new EmailAuthenticationCodeEntity(email, code, now));
@@ -60,7 +60,7 @@ public class EmailAuthenticationCodeService {
         CodeMessageResponse codeMessageResponse = emailAuthenticationCodeRepository.findById(email)
                 .filter(entity ->
                         entity.getCode().equals(code)
-                                && dateTimeUtil.timeGapToSeconds(entity.getCreateDate(), now) <= EXPIRE_TIME
+                                && !this.isExpirationTimeout(now, entity.getCreateDate().plusSeconds(EXPIRE_TIME))
                 )
                 .map(entity -> CodeMessageResponse.builder()
                         .code(1000)
@@ -74,6 +74,10 @@ public class EmailAuthenticationCodeService {
         }
 
         return codeMessageResponse;
+    }
+
+    private boolean isExpirationTimeout(LocalDateTime targetDateTime, LocalDateTime baseDateTime) {
+        return dateTimeUtil.timeGapToSeconds(targetDateTime, baseDateTime) <= 0;
     }
 
     private String createJwt(String email, LocalDateTime createDate) {

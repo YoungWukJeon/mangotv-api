@@ -21,20 +21,17 @@ import java.util.Date;
 public class EmailAuthenticationCodeJwtProvider {
     @Value("${jwt.secret-key}")
     private String secretKey;
-    public static final long MAX_TOKEN_VALID_SECONDS = 5 * 60L;    // 토큰 최대 만료 시간 5 minutes
+    public static final long MAX_TOKEN_VALID_SECONDS = 60 * 60L;    // 토큰 최대 만료 시간 1 hour
 
     @PostConstruct
     protected void init() {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    // TODO: 2019-12-11 토큰 만료시간이 예상과 비슷한지 확인해야 함
     public String createToken(String email, LocalDateTime createDate) {
         Claims claims = Jwts.claims().setSubject(email);
         Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
-        Date expireDate = createDate == null?
-                new Date(now.getTime() + MAX_TOKEN_VALID_SECONDS):
-                new Date(now.getTime() + createDate.getSecond());
+        Date expireDate = new Date(now.getTime() + MAX_TOKEN_VALID_SECONDS);
 
         return Jwts.builder()
                 .setClaims(claims)
