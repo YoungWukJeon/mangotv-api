@@ -19,7 +19,8 @@ public class UserService {
     }
 
     public UserInfoResponse saveUserInfo(UserRegistrationRequest userRegistrationRequest) {
-        // TODO: 2019-12-03 사용자 입력 데이터에 대한 Validation 체크 
+        // TODO: 2019-12-03 사용자 입력 데이터에 대한 Validation 체크
+        // TODO: 2019-12-13 사용자에게서 받은 email 주소와 jwt 인증을 한 email 주소가 같은지 확인
         
         if (!validateUniqueColumn(userRegistrationRequest)) {   // TODO: 2019-12-03 Unique 데이터에 대한 처리를 위한 정의 필요 
             throw new RuntimeException("validation fail");
