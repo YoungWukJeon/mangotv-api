@@ -48,11 +48,15 @@ public class UserRegistrationJwtProvider {
     }
 
     public Authentication getAuthentication(String token) {
-        return new UsernamePasswordAuthenticationToken(this.getId(token), token, defaultAuthorities);
+        return new UsernamePasswordAuthenticationToken(this.getJwtSubject(token), token, defaultAuthorities);
     }
 
-    private String getId(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+    private String getJwtSubject(String token) {
+        return Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 
     public String resolveToken(HttpServletRequest request) {
