@@ -13,8 +13,6 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-
-
 /** rest controller 요청에 대해서 api response 형식을 포맷팅 */
 @RestControllerAdvice
 public class ApiResponseBodyAdvice implements ResponseBodyAdvice<Object> {
@@ -31,13 +29,13 @@ public class ApiResponseBodyAdvice implements ResponseBodyAdvice<Object> {
                                   Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                   ServerHttpRequest request, ServerHttpResponse response) {
 
-        if(body instanceof ApiException){
+        if (body instanceof ApiException) {
             ApiException apiException = (ApiException) body;
             return ApiResponse.builder()
                     .httpStatus(apiException.getHttpStatus())
                     .apiException(new ApiExceptionResponse(apiException))
                     .build();
-        }else{
+        } else {
             return ApiResponse.builder()
                     .httpStatus(HttpStatus.OK)
                     .data(body)
