@@ -61,6 +61,10 @@ dependencies {
 	compile 'io.jsonwebtoken:jjwt-impl:0.10.7'
 	compile 'io.jsonwebtoken:jjwt-jackson:0.10.7'
 
+	// swagger
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
