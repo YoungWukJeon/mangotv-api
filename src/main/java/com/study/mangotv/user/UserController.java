@@ -11,8 +11,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{srl}")
-    public UserInfoResponse getUserInfo(@PathVariable Long srl) {
+    @GetMapping(value = "/{srl}")
+    public UserInfoResponse getUserInfo(
+            @PathVariable Long srl) {
         return userService.getUserInfo(srl);
     }
 

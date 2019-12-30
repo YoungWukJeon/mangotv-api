@@ -1,6 +1,8 @@
 package com.study.mangotv.common.model;
 
 
+//import io.swagger.annotations.ApiModelProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,10 +16,7 @@ import java.io.Serializable;
 @ToString
 @Builder
 public class ApiResponse implements Serializable {
-    // 상태코드
     private HttpStatus httpStatus;
-    // 실제 데이터
     private Object data;
-    // 예외
     private ApiExceptionResponse apiException;
 }
