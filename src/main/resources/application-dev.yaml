@@ -2,14 +2,74 @@ spring:
     http:
         encoding:
             charset: utf-8
+
     datasource:
-        url: jdbc:mysql://mangotv.cfhwcxf5qu53.ap-northeast-2.rds.amazonaws.com:3306/mangotv_dev?serverTimezone=UTC&useSSL=false
+        url: jdbc:mysql://mangotv.cfhwcxf5qu53.ap-northeast-2.rds.amazonaws.com:3306/mangotv_dev?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8
         username: mangotvadmin
         password: mangotvpass
         driver-class-name: com.mysql.cj.jdbc.Driver
+
     jpa:
-        show-sql: true
+        show-sql: false
         database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+    autoconfigure:
+        exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: test.kani123@gmail.com
+        password: testaccount123!!
+        properties:
+            mail:
+                debug: true
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+                    ssl:
+                        trust: smtp.gmail.com
+                mime:
+                    charset: utf-8
+                transport:
+                    protocol: smtp
+
+    thymeleaf:
+        prefix: classpath:templates/
+        check-template-location: true
+        suffix: .html
+        mode: HTML5
+        cache: false
+        #    cache: false  prod에서는 true로 해야함
+        order: 0
+
+#  cache:
+#    ehcache:
+#      config: classpath:ehcache.xml
+#
+#  resources:
+#    cache:
+#      cachecontrol:
+#        max-age: 5
+#        no-store: false
+#  resources:
+#    chain:
+#      strategy:
+#        content:
+#          enabled: true
+#          paths: /**
+
+jwt:
+    secret-key:
+        user-registration: SecretKeyForJWTInUserRegistration
+
+#springdoc:
+#  api-docs:
+##    path: /WEB-INF/resources/openapi.yaml
+##    path: /api-docs.yaml
+#  swagger-ui:
+#    path: /swagger-ui.html
 
 server:
     tomcat:

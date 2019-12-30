@@ -53,10 +53,23 @@ spring:
 #      cachecontrol:
 #        max-age: 5
 #        no-store: false
+#  resources:
+#    chain:
+#      strategy:
+#        content:
+#          enabled: true
+#          paths: /**
 
 jwt:
   secret-key:
     user-registration: SecretKeyForJWTInUserRegistration
+
+#springdoc:
+#  api-docs:
+##    path: /WEB-INF/resources/openapi.yaml
+##    path: /api-docs.yaml
+#  swagger-ui:
+#    path: /swagger-ui.html
 
 server:
   tomcat:
