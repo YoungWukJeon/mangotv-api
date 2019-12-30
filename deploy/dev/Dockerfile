@@ -1,6 +1,6 @@
 FROM rtfpessoa/ubuntu-jdk8
 
-RUN git clone https://github.com/YoungWukJeon/mangotv-api.git
+RUN git clone -b dev --single-branch https://github.com/YoungWukJeon/mangotv-api.git
 COPY . mangotv-api/
 WORKDIR mangotv-api
 

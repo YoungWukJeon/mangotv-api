@@ -3,6 +3,7 @@ package com.study.mangotv.common.config;
 import com.study.mangotv.common.config.jwt.UserRegistrationJwtAuthenticationFilter;
 import com.study.mangotv.common.config.jwt.UserRegistrationJwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -10,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 @EnableWebSecurity
 @Configuration
@@ -32,12 +35,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .addFilterBefore(new UserRegistrationJwtAuthenticationFilter(userRegistrationJwtProvider),
                             UsernamePasswordAuthenticationFilter.class);
-    }
-
-    // TODO: 2019-12-04 SWAGGER 등 기타 예외 url 등록
-    @Override
-    public void configure(WebSecurity web) {
-        super.configure(web);
-//        web.ignoring().antMatchers("");
     }
 }
