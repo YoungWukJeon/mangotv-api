@@ -1,0 +1,1 @@
+web: java -Dserver.port=8080 -Dspring.profiles.active=dev -jar build/libs/*.jar
