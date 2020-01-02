@@ -1,9 +1,9 @@
-package com.study.mangotv.emailauthenticationcode;
+package com.study.mangotv.auth.emailauthenticationcode;
 
 import com.study.mangotv.common.config.jwt.UserRegistrationJwtProvider;
 import com.study.mangotv.common.model.CodeMessageResponse;
 import com.study.mangotv.common.util.DateTimeUtil;
-import com.study.mangotv.emailauthenticationcode.model.EmailAuthenticationCodeRequest;
+import com.study.mangotv.auth.emailauthenticationcode.model.EmailAuthenticationCodeRequest;
 import com.study.mangotv.persistence.emailauthenticationcode.EmailAuthenticationCodeEntity;
 import com.study.mangotv.persistence.emailauthenticationcode.EmailAuthenticationCodeRepository;
 import com.study.mangotv.persistence.user.UserRepository;
@@ -41,7 +41,7 @@ public class EmailAuthenticationCodeService {
 
         String code = RandomStringUtils.randomAlphanumeric(GENERATED_CODE_LENGTH);  // deprecated
         System.out.println("Generated Code: " + code);  // deprecated
-        // TODO: 2019-12-13 클라이언트에서 개발편의성을 위해 성공 메시지에 랜덤code값 내려주기(위에 2줄은 나중에 제거)
+        // TODO: 2019-12-13 클라이언트에서 개발편의성을 위해 성공 메시지에 랜덤 code 값 내려주기(위에 2줄은 나중에 제거)
         CodeMessageResponse codeMessageResponse = emailAuthenticationCodeRepository.findById(email)
                 .filter(entity -> !this.isExpirationTimeout(now, entity.getCreateDate().plusSeconds(EXPIRE_TIME)))
                 .map(entity -> CodeMessageResponse.builder().code(1001).message("failure").build())
@@ -67,7 +67,7 @@ public class EmailAuthenticationCodeService {
                 )
                 .map(entity -> CodeMessageResponse.builder()
                         .code(1000)
-                        .message(this.createJwt(entity.getEmail(), entity.getCreateDate()))
+                        .message(this.createJwt(entity.getEmail()))
                         .build()
                 )
                 .orElse(CodeMessageResponse.builder().code(1001).message("failure").build());
@@ -84,7 +84,7 @@ public class EmailAuthenticationCodeService {
         return dateTimeUtil.timeGapToSeconds(targetDateTime, baseDateTime) <= 0;
     }
 
-    private String createJwt(String email, LocalDateTime createDate) {
-        return userRegistrationJwtProvider.createToken(email, createDate);
+    private String createJwt(String email) {
+        return userRegistrationJwtProvider.createToken(email);
     }
 }
