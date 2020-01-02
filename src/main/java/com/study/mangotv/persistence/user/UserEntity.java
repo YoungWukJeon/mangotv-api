@@ -1,6 +1,5 @@
 package com.study.mangotv.persistence.user;
 
-import com.study.mangotv.common.BaseDateTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +16,7 @@ import java.time.LocalDateTime;
         @UniqueConstraint(name = "unique_nickname", columnNames = "nickname"),
         @UniqueConstraint(name = "unique_email", columnNames = "email")
 })
-public class UserEntity extends BaseDateTimeEntity {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "srl")
@@ -48,8 +47,18 @@ public class UserEntity extends BaseDateTimeEntity {
     @Column(name = "icon_url")
     private String iconUrl;
 
+    @Column(name = "create_date", nullable = false, updatable = false)
+    private LocalDateTime createDate = LocalDateTime.now();
+
+    @Column(name = "update_date", nullable = false)
+    private LocalDateTime updateDate = LocalDateTime.now();
+
     @Column(name = "login_date")
     private LocalDateTime loginDate;
+
+    public void setLoginDate(LocalDateTime loginDate) {
+        this.loginDate = loginDate;
+    }
 
     @Builder
     public UserEntity(String id, String password, String nickname, String email, LocalDate birthDate, Character gender) {
