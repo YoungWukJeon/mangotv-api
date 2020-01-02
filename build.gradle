@@ -65,6 +65,10 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-ui:1.2.18'
 	implementation 'org.springdoc:springdoc-openapi-webmvc-core:1.2.18'
 
+	// redis & session
+	compile 'org.springframework.boot:spring-boot-starter-data-redis'
+	compile 'org.springframework.session:spring-session-data-redis'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
