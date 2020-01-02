@@ -33,7 +33,7 @@ public class UserRegistrationJwtProvider {
         defaultAuthorities.add(new SimpleGrantedAuthority("ROLE_USER_REGISTRATION_AUTHENTICATED"));
     }
 
-    public String createToken(String email, LocalDateTime createDate) {
+    public String createToken(String email) {
         Claims claims = Jwts.claims().setSubject(email);
         Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
         Date expireDate = new Date(now.getTime() + MAX_TOKEN_VALID_MILLISECONDS);

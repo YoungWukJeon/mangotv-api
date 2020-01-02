@@ -1,6 +1,6 @@
 package com.study.mangotv.common.controller;
 
-import com.study.mangotv.emailauthenticationcode.EmailAuthenticationCodeService;
+import com.study.mangotv.auth.emailauthenticationcode.EmailAuthenticationCodeService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
