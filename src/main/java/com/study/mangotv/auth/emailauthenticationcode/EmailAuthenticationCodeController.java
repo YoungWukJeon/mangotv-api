@@ -11,7 +11,7 @@ public class EmailAuthenticationCodeController {
     @Autowired
     private EmailAuthenticationCodeService emailAuthenticationCodeService;
 
-    @PostMapping("")
+    @PostMapping(value = "", consumes = {"application/json"})
     public CodeMessageResponse generateCode(@RequestBody EmailAuthenticationCodeRequest emailAuthenticationCodeRequest) {
         return emailAuthenticationCodeService.generateCode(emailAuthenticationCodeRequest);
     }
