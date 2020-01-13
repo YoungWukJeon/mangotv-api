@@ -46,9 +46,10 @@ spring:
 
   session:
     store-type: redis
+    timeout: -1 # infinite
     redis:
       namespace: spring:session
-      host: 127.0.0.1
+      host: localhost
       port: 6379
 
 #  cache:
