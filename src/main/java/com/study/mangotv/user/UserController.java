@@ -17,7 +17,7 @@ public class UserController {
         return userService.getUserInfo(srl);
     }
 
-    @PostMapping("")
+    @PostMapping(value = "", consumes = {"application/json"})
     public UserInfoResponse saveUserInfo(@RequestBody UserRegistrationRequest userRegistrationRequest) {
         return userService.saveUserInfo(userRegistrationRequest);
     }

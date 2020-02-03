@@ -1,4 +1,4 @@
-package com.study.mangotv.emailauthenticationcode.model;
+package com.study.mangotv.auth.emailauthenticationcode.model;
 
 import lombok.Data;
 

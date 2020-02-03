@@ -1,11 +1,15 @@
 package com.study.mangotv.persistence.user;
 
-import com.study.mangotv.common.BaseDateTimeEntity;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Getter
 @ToString
@@ -17,7 +21,7 @@ import java.time.LocalDateTime;
         @UniqueConstraint(name = "unique_nickname", columnNames = "nickname"),
         @UniqueConstraint(name = "unique_email", columnNames = "email")
 })
-public class UserEntity extends BaseDateTimeEntity {
+public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "srl")
@@ -48,8 +52,50 @@ public class UserEntity extends BaseDateTimeEntity {
     @Column(name = "icon_url")
     private String iconUrl;
 
+    @Column(name = "create_date", nullable = false, updatable = false)
+    private LocalDateTime createDate = LocalDateTime.now();
+
+    @Column(name = "update_date", nullable = false)
+    private LocalDateTime updateDate = LocalDateTime.now();
+
     @Column(name = "login_date")
     private LocalDateTime loginDate;
+
+    public void setLoginDate(LocalDateTime loginDate) {
+        this.loginDate = loginDate;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Collection authorities = new ArrayList();
+        authorities.add(new SimpleGrantedAuthority(this.userStatus.name()));
+        return authorities;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.id;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
     @Builder
     public UserEntity(String id, String password, String nickname, String email, LocalDate birthDate, Character gender) {

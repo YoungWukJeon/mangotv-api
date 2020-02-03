@@ -44,6 +44,14 @@ spring:
 #    cache: false  prod에서는 true로 해야함
     order: 0
 
+  session:
+    store-type: redis
+    timeout: 1m # infinite(-1)
+    redis:
+      namespace: spring:session
+      host: localhost
+      port: 6379
+
 #  cache:
 #    ehcache:
 #      config: classpath:ehcache.xml
