@@ -46,7 +46,7 @@ spring:
 
   session:
     store-type: redis
-    timeout: -1 # infinite
+    timeout: 1m # infinite(-1)
     redis:
       namespace: spring:session
       host: localhost

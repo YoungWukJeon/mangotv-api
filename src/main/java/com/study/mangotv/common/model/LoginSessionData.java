@@ -14,6 +14,7 @@ public class LoginSessionData implements Serializable {
     private Long srl;
     private String id;
     private Character gender;
+    private String status;
     private String iconUrl;
     private String nickname;
     private LocalDateTime loginDate;
@@ -23,6 +24,7 @@ public class LoginSessionData implements Serializable {
         this.srl = userEntity.getSrl();
         this.id = userEntity.getId();
         this.gender = userEntity.getGender();
+        this.status = userEntity.getUserStatus().name();
         this.iconUrl = userEntity.getIconUrl();
         this.nickname = userEntity.getNickname();
         this.loginDate = userEntity.getLoginDate();
