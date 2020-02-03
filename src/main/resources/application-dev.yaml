@@ -45,7 +45,7 @@ spring:
         order: 0
 
     redis:
-        host: localhost
+        host: 52.78.25.16
         port: 6379
 
     session:
