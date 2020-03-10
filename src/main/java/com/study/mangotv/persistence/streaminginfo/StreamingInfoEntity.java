@@ -53,15 +53,12 @@ public class StreamingInfoEntity {
     @Column(name = "start_date", nullable = false)
     private LocalDateTime startDate;
 
-    @Column(name = "viewer_num", nullable = false)
-    private Integer viewerNum = 0;
-
     @Builder
     public StreamingInfoEntity(String no, UserEntity userEntity, boolean isSecret,
                                String password, boolean adultRestriction,
                                String title, String bps, String resolution,
                                CategoryEntity categoryEntity, StreamingPlatform platform,
-                               LocalDateTime startDate, Integer viewerNum) {
+                               LocalDateTime startDate) {
         this.no = no;
         this.userEntity = userEntity;
         this.isSecret = isSecret;
@@ -73,6 +70,5 @@ public class StreamingInfoEntity {
         this.categoryEntity = categoryEntity;
         this.platform = platform;
         this.startDate = startDate;
-        this.viewerNum = viewerNum;
     }
 }
